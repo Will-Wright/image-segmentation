@@ -23,7 +23,7 @@ Source files:
 * `./src/SDPSubspaceSolver.py`: solves normalized cuts eigenvalue problem as a subspace SDP.  Requires 50% to 80% fewer flops than first-order methods.  
    - Status: not done
 
-* `./test/`: contains test images and prototyping files for completing this package.
+* `./test/`: contains test images and prototyping files for use in finishing package.
 
 
 Python Dependencies
