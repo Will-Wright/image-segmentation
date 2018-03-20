@@ -3,6 +3,7 @@
 # and (optionally) user-selected pixels and returns
 # TODO: What to return???
 #
+# TODO: In README, put clear list of terminal instructions for all package installations.
 #
 # This solver solves the following normalized cuts (Ncuts) model
 # [Eriksson, 2007]
@@ -38,7 +39,7 @@ def main(**kwargs):
 
 # TODO: Remove conversion to grayscale
     # Opens image
-    image = Image.open(image_path).convert('LA')
+    image = Image.open(image_path).convert('LA') # .convert('LA') makes image grayscale
     image_width = image.size[0]
     image_height = image.size[1]
     canvas = Tkinter.Canvas(window, width=image_width, height=image_height)
