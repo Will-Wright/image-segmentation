@@ -4,21 +4,27 @@ This software package separates an image into `k` disjoint subimages with simila
 
 Note: this package is still in development. When completed, it will perform the following functions:
 
-1. Unsupervised learning of image segments
-
-![baseball_original](baseball_original.png)
+1. Unsupervised learning of image segments: given the input image
 
 <p align="center"> 
 <img src="baseball_original.png">
+<span>Here's the overlay text</span>
 </p>
 
-![baseball_segmented](baseball_segmented.png)
+<p align="center">
+<img src="baseball_segmented.png">
+</p>
 
 [Jianbo Shi, Jitendra Malik:
 Normalized Cuts and Image Segmentation. IEEE Trans. Pattern Anal. Mach. Intell. 22(8): 888-905 (2000)](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/papers/sm_pami00.pdf)
 
 
 2. Semi-supervised learning of image segments
+
+<p align="center">
+<img src="flower_segmentation_with_contraints.png">
+</p>
+
 
 Contents
 --------
