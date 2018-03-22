@@ -32,7 +32,7 @@ Normalized Cuts and Image Segmentation. IEEE Trans. Pattern Anal. Mach. Intell. 
    - `outputs:` `k` subimages as demonstrated below:
 
 <p align="center">
-<img src="flower_segmentation_with_contraints.png">
+<img src="flower_segmentation_with_constraints.png">
 </p>
 
 
