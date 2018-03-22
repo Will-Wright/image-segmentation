@@ -10,6 +10,8 @@ Note: this package is still in development. When completed, it will perform the 
 
 <p align="center"> 
 <img src="baseball_original.png">
+</p>
+<p align="center">
 Original image.
 </p>
 
