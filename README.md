@@ -6,8 +6,11 @@ Note: this package is still in development. When completed, it will perform the 
 
 1. Unsupervised learning of image segments
 
-
 ![baseball_original](baseball_original.png)
+
+<p align="center"> 
+<img src="baseball_original.png">
+</p>
 
 ![baseball_segmented](baseball_segmented.png)
 
