@@ -2,7 +2,11 @@ Description
 -----------
 This software package separates an image into `k` disjoint subimages with similar properties (color, texture, etc.).
 
-Note: this package is still in development.
+Note: this package is still in development. When completed, it will perform the following functions:
+
+1. x
+
+2. y
 
 Contents
 --------
