@@ -10,8 +10,8 @@ Note: this package is still in development. When completed, it will perform the 
 
 <p align="center"> 
 <img src="baseball_original.png">
-</p>
 Original image.
+</p>
 
 <p align="center">
 <img src="baseball_segmented.png">
