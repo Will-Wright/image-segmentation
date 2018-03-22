@@ -18,7 +18,10 @@ Original image.
 <p align="center">
 <img src="baseball_segmented.png">
 </p>
+<p align="center">
 Processed image: (a) image resized to 80 x 100, (b-h) resulting segments.
+</p>
+
 
 Method and results are based on work from [Jianbo Shi, Jitendra Malik:
 Normalized Cuts and Image Segmentation. IEEE Trans. Pattern Anal. Mach. Intell. 22(8): 888-905 (2000)](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/papers/sm_pami00.pdf)
@@ -31,6 +34,7 @@ Normalized Cuts and Image Segmentation. IEEE Trans. Pattern Anal. Mach. Intell. 
 <p align="center">
 <img src="flower_segmentation_with_contraints.png">
 </p>
+
 
 Method and results are based on work from [Anders P. Eriksson, Carl Olsson, Fredrik Kahl:
 Normalized Cuts Revisited: A Reformulation for Segmentation with Linear Grouping Constraints. Journal of Mathematical Imaging and Vision 39(1): 45-61 (2011)](http://www2.maths.lth.se/vision/publdb/reports/pdf/eriksson-olsson-etal-jmiv-10.pdf)
