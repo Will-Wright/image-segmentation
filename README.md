@@ -4,9 +4,15 @@ This software package separates an image into `k` disjoint subimages with simila
 
 Note: this package is still in development. When completed, it will perform the following functions:
 
-1. x
+1. Unsupervised learning of image segments
 
-2. y
+
+![baseball_original](baseball_original.png)
+
+![baseball_segmented](baseball_segmented.png)
+
+
+2. Semi-supervised learning of image segments
 
 Contents
 --------
