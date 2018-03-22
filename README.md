@@ -4,27 +4,34 @@ This software package separates an image into `k` disjoint subimages with simila
 
 Note: this package is still in development. When completed, it will perform the following functions:
 
-1. Unsupervised learning of image segments: given the input image
+1. Unsupervised learning of image segments
+   - `inputs`: image, number `k` of requested subimages.
+   - `outputs:` `k` subimages as demonstrated below:
 
 <p align="center"> 
 <img src="baseball_original.png">
-<span>Here's the overlay text</span>
 </p>
+Original image.
 
 <p align="center">
 <img src="baseball_segmented.png">
 </p>
+Processed image: (a) image resized to 80 x 100, (b-h) resulting segments.
 
-[Jianbo Shi, Jitendra Malik:
+Method and results are based on work from [Jianbo Shi, Jitendra Malik:
 Normalized Cuts and Image Segmentation. IEEE Trans. Pattern Anal. Mach. Intell. 22(8): 888-905 (2000)](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/papers/sm_pami00.pdf)
 
 
-2. Semi-supervised learning of image segments
+2. Semi-supervised learning of image segments 
+   - `inputs`: image, grouping contraints on pixels, number `k` of requested subimages.
+   - `outputs:` `k` subimages as demonstrated below:
 
 <p align="center">
 <img src="flower_segmentation_with_contraints.png">
 </p>
 
+Method and results are based on work from [Anders P. Eriksson, Carl Olsson, Fredrik Kahl:
+Normalized Cuts Revisited: A Reformulation for Segmentation with Linear Grouping Constraints. Journal of Mathematical Imaging and Vision 39(1): 45-61 (2011)](http://www2.maths.lth.se/vision/publdb/reports/pdf/eriksson-olsson-etal-jmiv-10.pdf)
 
 Contents
 --------
