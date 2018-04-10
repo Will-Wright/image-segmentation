@@ -8,7 +8,6 @@ from scipy import sparse
 from math import sqrt
 
 def main(*argv):
-#    window = Tkinter.Tk(className="Original image")
 
     # Sets default values
     feat_type = 'grayscale_intensity'
@@ -21,20 +20,7 @@ def main(*argv):
     im_height = im.size[1]
     num_pixels = im_height*im_width
 
-#    canvas = Tkinter.Canvas(window, width=im_width, height=im_height)
-#    canvas.pack()
-
     im_arr = np.array(im).astype(np.float16)[0:im_height, 0:im_width, 0]
-
-
-#    im_tk = ImageTk.PhotoImage(im)
-#    canvas.create_image(im_width//2, im_height//2, image=im_tk)
-
-#    def callback(event):
-#	print "clicked at: ", event.x, event.y
-
-#    canvas.bind("<Button-1>", callback)
-#    Tkinter.mainloop()
 
     aff_arr = sp.sparse.csr_matrix((num_pixels, num_pixels))
 

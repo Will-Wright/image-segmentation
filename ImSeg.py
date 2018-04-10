@@ -30,24 +30,24 @@ import numpy as np
 
 def main(**kwargs):
     if 'image_path' in kwargs:
-        image_path = kwargs['image_path']
-        print 'Image path provided by user: ', image_path
+        im_path = kwargs['image_path']
+        print 'Image path provided by user: ', im_path
     else:
-        image_path = '../test/mellon_collie_and_the_infinite_sadness_test.jpg'
-        print 'Default image chosen from path: ', image_path
+        im_path = 'test/mellon_collie_and_the_infinite_sadness_test.jpg'
+        print 'Default image chosen from path: ', im_path
     window = Tkinter.Tk(className='Initial image')
 
 # TODO: Remove conversion to grayscale
     # Opens image
-    image = Image.open(image_path).convert('LA') # .convert('LA') makes image grayscale
-    image_width = image.size[0]
-    image_height = image.size[1]
-    canvas = Tkinter.Canvas(window, width=image_width, height=image_height)
+    im = Image.open(im_path).convert('LA') # .convert('LA') makes image grayscale
+    im_width = im.size[0]
+    im_height = im.size[1]
+    canvas = Tkinter.Canvas(window, width=im_width, height=im_height)
     canvas.pack()
-    image_tk = ImageTk.PhotoImage(image)
+    im_tk = ImageTk.PhotoImage(im)
 
     # Displays image and allows user to select pixels for image subregions
-    canvas.create_image(image_width//2, image_height//2, image=image_tk)
+    canvas.create_image(im_width//2, im_height//2, image=im_tk)
     region1_array = np.zeros((100, 2))
 
 # TODO NEXT: Correctly store pixel coords
@@ -62,7 +62,7 @@ def main(**kwargs):
     Tkinter.mainloop()
 
     # Converts image to numpy array   TODO: Remove grayscale biz
-    image_array = np.array(image).astype(np.float16)[0:image_height, 0:image_width, 0]
+    im_array = np.array(im).astype(np.float16)[0:im_height, 0:im_width, 0]
 
     return region1_array
 
