@@ -1,26 +1,21 @@
-import Tkinter
-from PIL import Image, ImageTk
-import time
+#import Tkinter
+#from PIL import Image, ImageTk
+#import time
 from sys import argv
 import numpy as np
 import scipy as sp
 from scipy import sparse
 from math import sqrt
 
-def main(*argv):
+def main(im_arr):
 
     # Sets default values
     feat_type = 'grayscale_intensity'
     sig_feat = 1
     sig_dist = 1
     max_dist_in_aff = 1
-
-    im = Image.open(argv[0] if len(argv) >=1 else '../test/mellon_collie_and_the_infinite_sadness_test.jpg').convert('LA')
-    im_width = im.size[0]
-    im_height = im.size[1]
+    [im_height, im_width] = im_arr.shape
     num_pixels = im_height*im_width
-
-    im_arr = np.array(im).astype(np.float16)[0:im_height, 0:im_width, 0]
 
     aff_arr = sp.sparse.csr_matrix((num_pixels, num_pixels))
 
@@ -36,7 +31,7 @@ def main(*argv):
             if pixel_dist <= max_dist_in_aff:
                 aff_arr = aff_arr + get_similarity_bands(im_arr, row_shift, col_shift, feat_type, sig_feat, sig_dist)
 
-    return (im_arr, aff_arr)
+    return aff_arr
 
 
 def get_similarity_bands(im, row_shift, col_shift, feat_type, sig_feat, sig_dist):

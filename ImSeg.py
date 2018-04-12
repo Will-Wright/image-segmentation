@@ -27,6 +27,20 @@ import Tkinter
 from PIL import Image, ImageTk
 from sys import argv
 import numpy as np
+import os, sys, inspect
+# Adds cwd to path
+cmd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
+if cmd_folder not in sys.path:
+    sys.path.insert(0, cmd_folder)
+# Adds src and test subdirectories to path
+cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0], 'src')))
+if cmd_subfolder not in sys.path:
+    sys.path.insert(0, cmd_subfolder)
+cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.    currentframe() ))[0], 'test')))
+if cmd_subfolder not in sys.path:
+    sys.path.insert(0, cmd_subfolder)
+import GetAdjMat
+
 
 def main(**kwargs):
     if 'image_path' in kwargs:
@@ -48,23 +62,26 @@ def main(**kwargs):
 
     # Displays image and allows user to select pixels for image subregions
     canvas.create_image(im_width//2, im_height//2, image=im_tk)
-    region1_array = np.zeros((100, 2))
+    region1_arr = np.zeros((100, 2))
 
 # TODO NEXT: Correctly store pixel coords
 
 #    arr_idx = 0
     def callback(event):
 #        global arr_idx
-#        region1_array[arr_idx, :] = [event.x, event.y]
+#        region1_arr[arr_idx, :] = [event.x, event.y]
         print 'clicked at: ', event.x, event.y
 #        arr_idx += 1
     canvas.bind("<Button-1>", callback)
     Tkinter.mainloop()
 
     # Converts image to numpy array   TODO: Remove grayscale biz
-    im_array = np.array(im).astype(np.float16)[0:im_height, 0:im_width, 0]
+    im_arr = np.array(im).astype(np.float16)[0:im_height, 0:im_width, 0]
 
-    return region1_array
+    aff_arr = GetAdjMat.main(im_arr)
+
+
+    return (im_arr, aff_arr, region1_arr)
 
 
 
