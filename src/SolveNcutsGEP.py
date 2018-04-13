@@ -21,11 +21,18 @@ def main(W):
     d = W.sum(axis=0)
     D = spdiags(d, 0, n, n)
 
+    D_inv = spdiags(1/d, 0, n, n)
+    A = D_inv*W
+
+# GOTTA VERIFY matrix A is correct.  not getting A = A' in testing
+
+    A = 0.5*(A + np.transpose(A))
+
 #    n = 1000
 
 #    A = np.random.rand(1000, 1000)
 #    A = A + np.transpose(A)
-    [d, V] = eigsh(D-W, k=1, M=D, which='SA', tol=eig_tol)
+    [d, V] = eigsh(A, k=1, which='SA', tol=eig_tol)
 #    D = np.matmul(np.transpose(V),np.matmul(A,V))
 
     return d, V
