@@ -9,7 +9,7 @@
 import numpy as np
 import sys
 sys.path.insert(0, "../src")
-import SolveSubspaceSDP
+import SolveSDPwithCvxopt
 
 def main():
     A = np.zeros((3, 3, 2))
@@ -24,6 +24,6 @@ def main():
     Z = np.array( [ [4.279548066242836, -1.577026060733195, -1.856574126764909],
             [-1.577026060733195, 2.411688463573145, -1.468128374777965],
             [-1.856574126764909, -1.468128374777965, 3.335987636248442] ] )
-    SolveSubspaceSDP.main(A, b, C)
+    SolveSDPwithCvxopt.main(A, b, C)
 
 

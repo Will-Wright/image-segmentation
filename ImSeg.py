@@ -23,40 +23,45 @@
 # [Kressner Lu Vandereycken, 2017].
 #
 
-import Tkinter
+import tkinter
 from PIL import Image, ImageTk
 from sys import argv
 import numpy as np
 import os, sys, inspect
-# Adds cwd to path
-cmd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
-if cmd_folder not in sys.path:
-    sys.path.insert(0, cmd_folder)
-# Adds src and test subdirectories to path
-cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0], 'src')))
-if cmd_subfolder not in sys.path:
-    sys.path.insert(0, cmd_subfolder)
-cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.    currentframe() ))[0], 'test')))
-if cmd_subfolder not in sys.path:
-    sys.path.insert(0, cmd_subfolder)
-import GetAdjMat
 
+# Adds cwd to path
+cwd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
+if cwd_folder not in sys.path:
+    sys.path.insert(0, cwd_folder)
+# Adds src and test subdirectories to path
+cwd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0], 'src')))
+if cwd_subfolder not in sys.path:
+    sys.path.insert(0, cwd_subfolder)
+cwd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.    currentframe() ))[0], 'test')))
+if cwd_subfolder not in sys.path:
+    sys.path.insert(0, cwd_subfolder)
+
+import GetAdjMat
+import SolveNcuts
 
 def main(**kwargs):
     if 'image_path' in kwargs:
         im_path = kwargs['image_path']
-        print 'Image path provided by user: ', im_path
+        print('Image path provided by user: ', im_path)
     else:
+# We can do this instead of all the directory-path stuff above
+#        cwd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
+#        im_path = os.path.join(cwd_folder, 'test/mellon_collie_and_the_infinite_sadness_test.jpg')
         im_path = 'test/mellon_collie_and_the_infinite_sadness_test.jpg'
-        print 'Default image chosen from path: ', im_path
-    window = Tkinter.Tk(className='Initial image')
+        print('Default image chosen: ', im_path)
+    window = tkinter.Tk(className='Initial image')
 
 # TODO: Remove conversion to grayscale
     # Opens image
     im = Image.open(im_path).convert('LA') # .convert('LA') makes image grayscale
     im_width = im.size[0]
     im_height = im.size[1]
-    canvas = Tkinter.Canvas(window, width=im_width, height=im_height)
+    canvas = tkinter.Canvas(window, width=im_width, height=im_height)
     canvas.pack()
     im_tk = ImageTk.PhotoImage(im)
 
@@ -70,18 +75,23 @@ def main(**kwargs):
     def callback(event):
 #        global arr_idx
 #        region1_arr[arr_idx, :] = [event.x, event.y]
-        print 'clicked at: ', event.x, event.y
+        print('clicked at: ', event.x, event.y)
 #        arr_idx += 1
     canvas.bind("<Button-1>", callback)
-    Tkinter.mainloop()
+    tkinter.mainloop()
 
     # Converts image to numpy array   TODO: Remove grayscale biz
     im_arr = np.array(im).astype(np.float16)[0:im_height, 0:im_width, 0]
 
     aff_arr = GetAdjMat.main(im_arr)
 
+    (d, V) = SolveNcuts.main(aff_arr)
 
-    return (im_arr, aff_arr, region1_arr)
+    V_sign = np.sign(V)
+
+    im_cut = np.reshape(V_sign, (im_height, im_width)).T
+
+    return (im_arr, aff_arr, region1_arr, d, V, im_cut)
 
 
 

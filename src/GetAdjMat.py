@@ -1,3 +1,16 @@
+# This function generates the adjacency matrix for a given image
+#
+# This function vectorizes the inputted image
+# by mapping columns a_1, ..., a_colmax
+# to v = [ [a_1], ..., [a_colmax] ] and then
+# generating the adjacency matrix
+#
+# The returned matrix is sparse
+#
+
+
+
+
 #import Tkinter
 #from PIL import Image, ImageTk
 #import time
