@@ -1,8 +1,6 @@
 Description
 -----------
-This software package separates an image into disjoint subimages with similar properties (color, texture, etc.).
-
-The user may also include must-link constraints as indicated below.
+This software package separates an image into disjoint subimages with similar properties (color, texture, etc.). The user may also include must-link constraints.
 
 #### New Contributions:
 
@@ -49,19 +47,17 @@ Contents
 
 Main function:
 
-* `./ImSeg.py`: takes an image and an integer `k` as inputs. Segments the image into `k` disjoint subimages. Returns an array of the `k` disjoint subimages. 
-   - Status: not done
+* `./ImSeg.py`: takes an image and possible link constriants as inputs. Segments the image into disjoint subimages. Returns an array of disjoint subimages.
 
 Key files and folders:
 
-* `./src/SDPSubspaceSolver/*`: our new method which solves the image segmentation eigenvalue problem as a subspace SDP (semidefinite program).  Requires 50% to 80% fewer flops than first-order methods.
+* `./src/SDPSubspaceSolver/*`: our new method which solves the image segmentation eigenvalue problem as a subspace SDP (semidefinite program).  Requires 50% to 80% fewer flops than the previous method by Eriksson, et al.
 
 * `./src/NewtonEigSolver/*`: an implementation of the original Newton method for the image segmentation problem by Eriksson, et al.
 
 * `./src/GetAdjMat.py`: computes the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  The current method in `scikit-image` requires `O(n^2)`.
-   - Status: not done.  Need to finish coding binary ops on adjacency relations.
 
-* `./test/`: contains test images and prototyping files for use in finishing package.
+* `./test/`: contains test images and prototyping files.
 
 
 Python Dependencies
@@ -77,5 +73,3 @@ Additional Comments
 
 * The original non-constrained image segmentation method is [Jianbo Shi, Jitendra Malik:
 Normalized Cuts and Image Segmentation. IEEE Trans. Pattern Anal. Mach. Intell. 22(8): 888-905 (2000)](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/papers/sm_pami00.pdf)
-
-
