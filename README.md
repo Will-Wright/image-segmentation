@@ -2,6 +2,15 @@ Description
 -----------
 This software package separates an image into disjoint subimages with similar properties (color, texture, etc.).
 
+<div style="width: 20%; float:left">
+   #left content in here
+</div>
+
+<div style="width: 80%; float:right">
+   #right content in there
+</div>
+
+
 <p align="center"> 
 <img src="person_walking_small.jpg">
 </p>
