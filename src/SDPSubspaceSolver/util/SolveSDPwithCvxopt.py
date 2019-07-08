@@ -19,7 +19,7 @@
 # Below is a conversion table for the SDP coefficients and variables
 # for our SDP primal and dual vs the cvxopt SDP primal and dual.
 #
-#       (A, b, C)           cvxopt
+#     our format        cvxopt format
 #     ----------------------------------------------------
 #           A           Gs1 = [vec(A1), ..., vec(Am)]
 #           b           -c
@@ -32,11 +32,13 @@
 #
 
 from cvxopt import matrix, solvers
+from numpy import array
 
 import numpy as np
 import scipy as sp
 
-def main(A, b, C):
+def SolveSDPwithCvxopt(A, b, C, verbose=False, gap_tol=1e-7, \
+                       rel_tol=1e-6, feas_tol=1e-7):
     c = matrix(-b)
     # Note: A must be a numpy array of size (r, c, t) = (n, n, m)
     # where r = rows, c = cols, and t = no. matrices
@@ -45,14 +47,20 @@ def main(A, b, C):
     #G = [ matrix( np.transpose(np.reshape(A, (m, n*n))) ) ]
     G = [ matrix( np.reshape(A, (n*n, m)) ) ]
     h = [ matrix(C) ]
+    solvers.options['show_progress'] = verbose
+    solvers.options['abstol'] = gap_tol
+    solvers.options['reltol'] = rel_tol
+    solvers.options['feastol'] = feas_tol
     sol = solvers.sdp(c, Gs=G, hs=h)
-    print("\ny = \n")
-    print(sol['x'])
-    print("X = \n")
-    print(sol['zs'][0])
-    print("Z =\n")
+#    print("\ny = \n")
+#    print(sol['x'])
+#    print("X = \n")
+#    print(sol['zs'][0])
+#    print("Z =\n")
 #    print(sol['s1'][0])
-    return sol
+    X = array(sol['zs'][0])
+    y = array(sol['x'])
+    return X, y
 
 
 

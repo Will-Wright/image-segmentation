@@ -1,8 +1,7 @@
 Description
 -----------
-This software package separates an image into `k` disjoint subimages with similar properties (color, texture, etc.).
+This software package separates an image into disjoint subimages with similar properties (color, texture, etc.).
 
-Note: this package is still in development. When completed, it will perform the following functions:
 
 1. Unsupervised learning of image segments
    - `inputs`: image, number `k` of requested subimages.
