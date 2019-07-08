@@ -4,6 +4,8 @@ This software package separates an image into disjoint subimages with similar pr
 
 The user may also include must-link constraints as indicated below.
 
+### HI
+
 
 Demo Tutorial
 -------------
@@ -48,15 +50,14 @@ Main function:
 
 Source files:
 
-* `./src/SDPSubspaceSolver.py`: solves normalized cuts eigenvalue problem as a subspace SDP.  Requires 50% to 80% fewer flops than first-order methods.  
-   - Status: not done
+* `./src/SDPSubspaceSolver/*`: our new method which solves the image segmentation eigenvalue problem as a subspace SDP (semidefinite program).  Requires 50% to 80% fewer flops than first-order methods.
 
-* `./src/NewtonEigSolver/*`: 
+* `./src/NewtonEigSolver/*`: an implementation of the original Newton method for the image segmentation problem by Eriksson, et al.
 
 * `./src/GetAdjMat.py`: computes the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  The current method in `scikit-image` requires `O(n^2)`.
    - Status: not done.  Need to finish coding binary ops on adjacency relations.
 
-* `./src/SolveSDPwithCvxopt.py`: transforms SDP (semidefinite program) into  appropriate model format and solves it with `cvxopt` optimization package.
+* `./src/SolveSDPwithCvxopt.py`: transforms SDP into  appropriate model format and solves it with `cvxopt` optimization package.
    - Status: done
 
 * `./test/`: contains test images and prototyping files for use in finishing package.
