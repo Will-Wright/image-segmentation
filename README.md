@@ -4,7 +4,11 @@ This software package separates an image into disjoint subimages with similar pr
 
 The user may also include must-link constraints as indicated below.
 
-### HI
+#### New Contributions:
+
+* more efficient method for image segmentation eigenvalue problem
+
+* more efficient method for computing adjacency matrix
 
 
 Demo Tutorial
