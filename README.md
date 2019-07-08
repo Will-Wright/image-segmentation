@@ -52,7 +52,7 @@ Main function:
 * `./ImSeg.py`: takes an image and an integer `k` as inputs. Segments the image into `k` disjoint subimages. Returns an array of the `k` disjoint subimages. 
    - Status: not done
 
-Source files:
+Key files and folders:
 
 * `./src/SDPSubspaceSolver/*`: our new method which solves the image segmentation eigenvalue problem as a subspace SDP (semidefinite program).  Requires 50% to 80% fewer flops than first-order methods.
 
@@ -60,9 +60,6 @@ Source files:
 
 * `./src/GetAdjMat.py`: computes the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  The current method in `scikit-image` requires `O(n^2)`.
    - Status: not done.  Need to finish coding binary ops on adjacency relations.
-
-* `./src/SolveSDPwithCvxopt.py`: transforms SDP into  appropriate model format and solves it with `cvxopt` optimization package.
-   - Status: done
 
 * `./test/`: contains test images and prototyping files for use in finishing package.
 
