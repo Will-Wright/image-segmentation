@@ -2,11 +2,6 @@ Description
 -----------
 This software package separates an image into disjoint subimages with similar properties (color, texture, etc.).
 
-
-1. Unsupervised learning of image segments
-   - `inputs`: image, number `k` of requested subimages.
-   - `outputs:` `k` subimages as demonstrated below:
-
 <p align="center"> 
 <img src="person_walking_small.jpg">
 </p>
@@ -20,6 +15,13 @@ Original image.
 <p align="center">
 Processed image: (a) image resized to 80 x 100, (b-h) resulting segments.
 </p>
+
+
+  - `inputs`: image, number `k` of requested subimages.
+  - `outputs:` `k` subimages as demonstrated below:
+
+
+
 
 
 Method and results are based on work from [Jianbo Shi, Jitendra Malik:
