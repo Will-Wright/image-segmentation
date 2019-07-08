@@ -8,14 +8,14 @@ This software package separates an image into disjoint subimages with similar pr
    - `outputs:` `k` subimages as demonstrated below:
 
 <p align="center"> 
-<img src="baseball_original.png">
+<img src="person_walking_small.jpg">
 </p>
 <p align="center">
 Original image.
 </p>
 
 <p align="center">
-<img src="baseball_segmented.png">
+<img src="person_walking_seg.png">
 </p>
 <p align="center">
 Processed image: (a) image resized to 80 x 100, (b-h) resulting segments.
