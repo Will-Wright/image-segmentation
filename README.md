@@ -8,7 +8,7 @@ The user may also include must-link constraints as indicated below.
 Demo Tutorial
 -------------
 
-To run a quick demo, please call the function 'RunDemo.main()' (dependencies listed below).
+To run a quick demo, you may call the function `RunDemo.main()` (dependencies listed below).
 
 <p align="center"> 
 <img src="person_walking_small.jpg">
@@ -23,6 +23,17 @@ Original image
 <p align="center">
 Segmented regions
 </p>
+
+
+<p align="center">
+<img src="demo_fig1.png">
+</p>
+<p align="center">
+Results
+</p>
+
+
+
 
 
   - `inputs`: image, number `k` of requested subimages.
