@@ -2,18 +2,19 @@ Description
 -----------
 This software package separates an image into disjoint subimages with similar properties (color, texture, etc.).
 
-hi
+The user may also include must-link constraints as indicated below.
 
 
 Demo Tutorial
 -------------
 
+To run a quick demo, please call the function 'RunDemo.main()' (dependencies listed below).
 
 <p align="center"> 
 <img src="person_walking_small.jpg">
 </p>
 <p align="center">
-Original image.
+Original image
 </p>
 
 <p align="center">
@@ -74,5 +75,5 @@ Python Dependencies
 * `Tkinter`
 * `PIL`
 * `cvxopt`
-* `numpy`, `scipy`
+* `matplotlib`, `numpy`, `scipy`
 
