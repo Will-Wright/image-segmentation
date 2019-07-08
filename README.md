@@ -38,6 +38,15 @@ Segmented regions
 
 
 
+General Tutorial
+----------------
+
+
+
+
+
+
+
   - `inputs`: image, number `k` of requested subimages.
   - `outputs:` `k` subimages as demonstrated below:
 
