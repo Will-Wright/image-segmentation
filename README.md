@@ -2,6 +2,8 @@ Description
 -----------
 This software package separates an image into disjoint subimages with similar properties (color, texture, etc.).
 
+hi
+
 
 Demo Tutorial
 -------------

@@ -33,6 +33,7 @@ def SolveNCuts(aff_arr, eig_tol=1e-4):
         D = sp.sparse.spdiags(aff_arr_rowsum, 0, n, n)
         [d, V] = eigsh(D - aff_arr, M=D, k = 1, which = 'SA', tol = eig_tol)
 
+    print("NCuts routine completed")
 
     return d, V
 

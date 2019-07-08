@@ -97,8 +97,6 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
                          must_link_list1, must_link_list2, \
                          is_demo_mode)
 
-
-
     
     # Solves im seg subproblem(s) to initialize full problem
     if attempt_resize:
@@ -119,9 +117,6 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
             resize_ratio_list.append(resize_ratio**(len(resize_dims_list)))
             im_num_pix_temp = im_num_pix * (resize_ratio_list[-1]**2)        
         resize_ratio_list.pop()
-
-#        print(resize_ratio_list)
-#        print(resize_dims_list)
         
         while len(resize_ratio_list) > 1:
             im_size_resize = resize_dims_list.pop()
@@ -257,69 +252,71 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
             else:
                 (V1, f) = NES_out
             v_Newton = N.dot(V1[:,0])[0:im_width*im_height]
+            
+            v_out = v_Newton
+            
+        else:
+            v_out = v_SDPSS
+            
+   
+        end = time.process_time()
+        
     else:
-        (d, v) = SolveNCuts(adj_mat, eigsh_tol_min)        
-    end = time.process_time()
-    
-    
+        (d, v_NCuts) = SolveNCuts(adj_mat, eigsh_tol_min)  
+        v_out = v_NCuts
+        end = time.process_time()
+        
+        
+
     # Converts NCuts solution to image
-    
-    v_SDPSS_sign = np.sign(v_SDPSS)
-    im_seg_SDPSS_arr = np.reshape(v_SDPSS_sign, (im_width, im_height)).T
+    v_out_sign = np.sign(v_out)
+    im_seg_Newton_arr = np.reshape(v_out_sign, (im_width, im_height)).T
 
-    #v_SDPSS_scaled = v_SDPSS/max(abs(v_SDPSS))
-    #im_seg_SDPSS_arr = np.reshape(v_SDPSS_scaled, (im_width, im_height)).T
-    
-    im_seg_SDPSS_gray = Image.fromarray((im_seg_SDPSS_arr + 1)*128)
-    
-    
-    #if is_demo_mode:
+    im_seg_RGB_arr = np.zeros((im_height, im_width, 3), 'uint8')
+    for i in range(0,im_height):
+        for j in range(0,im_width):
+            if im_seg_Newton_arr[i,j] == 1:
+                im_seg_RGB_arr[i,j, 0] = 255
+                im_seg_RGB_arr[i,j, 1] = 153
+                im_seg_RGB_arr[i,j, 2] = 51
+            else:
+                im_seg_RGB_arr[i,j, 0] = 153
+                im_seg_RGB_arr[i,j, 1] = 0
+                im_seg_RGB_arr[i,j, 2] = 153
+
+    im_seg_RGB = Image.fromarray(im_seg_RGB_arr)
+
+
+    if is_demo_mode:
         # Displays segmented image
-        #im_seg_SDPSS_gray.show(title="SDPSS Image")
-    
-    
-    if use_NewtonEigSolver:
-        # Converts NCuts solution to image
-        
-        v_Newton_sign = np.sign(v_Newton)
-        im_seg_Newton_arr = np.reshape(v_Newton_sign, (im_width, im_height)).T
+        time.sleep(3)
+        im_seg_RGB.show(title="Newton Image")
 
-        im_seg_RGB_arr = np.zeros((im_height, im_width, 3), 'uint8')
-        for i in range(0,im_height):
-            for j in range(0,im_width):
-                if im_seg_Newton_arr[i,j] == 1:
-                    im_seg_RGB_arr[i,j, 0] = 255
-                    im_seg_RGB_arr[i,j, 1] = 153
-                    im_seg_RGB_arr[i,j, 2] = 51
-                else:
-                    im_seg_RGB_arr[i,j, 0] = 153
-                    im_seg_RGB_arr[i,j, 1] = 0
-                    im_seg_RGB_arr[i,j, 2] = 153
         
-        im_seg_RGB = Image.fromarray(im_seg_RGB_arr)
-        
-        #v_Newton_scaled = v_Newton/max(abs(v_Newton))
-        #im_seg_Newton_arr = np.reshape(v_Newton_scaled, (im_width, im_height)).T
-        
-        #im_seg_Newton_gray = Image.fromarray((im_seg_Newton_arr + 1)*128)
-        
-        if is_demo_mode:
-            # Displays segmented image
-            time.sleep(3)
-            im_seg_RGB.show(title="Newton Image")
+    
+    # NEED TO FIX RETURN DATA
+    
     
     if return_data:
-        if use_NewtonEigSolver:
-            data = {'SDPSS_data': SDPSS_data, 
-                    'NES_data': NES_data}
+        if is_lifted:
+            if use_NewtonEigSolver:
+                data = {'SDPSS_data': SDPSS_data, 
+                        'NES_data': NES_data}
+            else:
+                data = {'SDPSS_data':SDPSS_data}
         else:
-            data = {'SDPSS_data':SDPSS_data}
+            X_sub = {}
+            V_sub = {}
+            data = {}
         out = (im_RGB_arr, adj_mat, \
                must_link_list1, must_link_list2, \
                X_sub, V_sub, im_seg_RGB_arr, \
                im_RGB, N, data)
     else:
-        out = im_RGB_arr
+        out = im_seg_RGB_arr
+    
+    
+
     
     return out
 
