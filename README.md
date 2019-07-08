@@ -8,7 +8,10 @@ The user may also include must-link constraints as indicated below.
 Demo Tutorial
 -------------
 
-To run a quick demo, you may call the function `RunDemo.main()` (dependencies listed below).
+The following results demonstrate the efficiency of our `SDPSubspaceSolver` over the previously developed `NewtonEigSolver` for image segmentation as proposed by [Anders P. Eriksson, Carl Olsson, Fredrik Kahl:
+Normalized Cuts Revisited: A Reformulation for Segmentation with Linear Grouping Constraints. Journal of Mathematical Imaging and Vision 39(1): 45-61 (2011)](http://www2.maths.lth.se/vision/publdb/reports/pdf/eriksson-olsson-etal-jmiv-10.pdf)
+
+To recreate this demo, call the function `RunDemo.main()` (dependencies listed below). 
 
 <p align="center"> 
 <img src="person_walking_small.jpg">
@@ -29,7 +32,6 @@ Segmented regions
 <img src="demo_fig1.png">
 </p>
 <p align="center">
-Results
 </p>
 
 
@@ -55,9 +57,6 @@ Normalized Cuts and Image Segmentation. IEEE Trans. Pattern Anal. Mach. Intell. 
 <img src="flower_segmentation_with_constraints.png">
 </p>
 
-
-Method and results are based on work from [Anders P. Eriksson, Carl Olsson, Fredrik Kahl:
-Normalized Cuts Revisited: A Reformulation for Segmentation with Linear Grouping Constraints. Journal of Mathematical Imaging and Vision 39(1): 45-61 (2011)](http://www2.maths.lth.se/vision/publdb/reports/pdf/eriksson-olsson-etal-jmiv-10.pdf)
 
 Contents
 --------
