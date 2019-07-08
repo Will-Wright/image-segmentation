@@ -2,13 +2,9 @@ Description
 -----------
 This software package separates an image into disjoint subimages with similar properties (color, texture, etc.).
 
-<div style="width: 20%; float:left">
-   #left content in here
-</div>
 
-<div style="width: 80%; float:right">
-   #right content in there
-</div>
+Demo Tutorial
+-------------
 
 
 <p align="center"> 
@@ -22,7 +18,7 @@ Original image.
 <img src="person_walking_seg.png">
 </p>
 <p align="center">
-Processed image: (a) image resized to 80 x 100, (b-h) resulting segments.
+Segmented regions
 </p>
 
 
