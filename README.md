@@ -28,8 +28,7 @@ with convergence theory presented in the recent papers
 Demo Tutorial
 -------------
 
-The following results demonstrate the efficiency of our `SDPSubspaceSolver` over the previously developed `NewtonEigSolver` for image segmentation as proposed by 
-
+The following results demonstrate the efficiency of our `SDPSubspaceSolver` over the previously developed `NewtonEigSolver` for image segmentation as proposed by Eriksson, Olsson, Kahl.
 
 To recreate this demo, call the function `RunDemo.main()` (dependencies listed below). 
 
