@@ -2,11 +2,20 @@ Description
 -----------
 This software package separates an image into disjoint subimages with similar properties (color, texture, etc.). The user may also include must-link constraints.
 
-The new algorithm `SDPSubspaceSolver` solves the constrained image segmentation problem as described in [Anders P. Eriksson, Carl Olsson, Fredrik Kahl:
+The new algorithm `SDPSubspaceSolver` solves the constrained image segmentation problem as described in 
+
+* [Anders P. Eriksson, Carl Olsson, Fredrik Kahl:
 Normalized Cuts Revisited: A Reformulation for Segmentation with Linear Grouping Constraints. Journal of Mathematical Imaging and Vision 39(1): 45-61 (2011)](http://www2.maths.lth.se/vision/publdb/reports/pdf/eriksson-olsson-etal-jmiv-10.pdf).  
 
-Our subspace method is based on the following method [Oliveira, Stewart, Soma: A Subspace Semidefinite Programming for Spectral Graph Partitioning](https://homepage.cs.uiowa.edu/~oliveira/PAPER2/oliveira-stew-soma-LNCS2329-02.pdf) which has been recently 
-[Kangal, et al: A Subspace Method for Large Scale Eigenvalue Optimization](https://arxiv.org/abs/1508.04214) and [Kressner, Lu, Vandereycken: Subspace acceleration for the Crawford number and related eigenvalue optimization problems](http://sma.epfl.ch/~anchpcommon/publications/crawford_preprint.pdf)
+Our subspace method is based on the following method 
+
+* [Oliveira, Stewart, Soma: A Subspace Semidefinite Programming for Spectral Graph Partitioning](https://homepage.cs.uiowa.edu/~oliveira/PAPER2/oliveira-stew-soma-LNCS2329-02.pdf) 
+
+with convergence theory presented in the recent papers
+
+* [Kangal, et al: A Subspace Method for Large Scale Eigenvalue Optimization](https://arxiv.org/abs/1508.04214) and 
+
+* [Kressner, Lu, Vandereycken: Subspace acceleration for the Crawford number and related eigenvalue optimization problems](http://sma.epfl.ch/~anchpcommon/publications/crawford_preprint.pdf)
 
 
 #### New Contributions:
