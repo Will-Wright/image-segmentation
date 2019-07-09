@@ -18,6 +18,9 @@ with convergence theory presented in the recent papers
 * [Kressner, Lu, Vandereycken: Subspace acceleration for the Crawford number and related eigenvalue optimization problems](http://sma.epfl.ch/~anchpcommon/publications/crawford_preprint.pdf)
 
 
+For a draft of the paper describing the method used in `SDPSubspaceSolver`, please contact me.
+
+
 ### New Contributions:
 
 * More efficient method for image segmentation eigenvalue problem
