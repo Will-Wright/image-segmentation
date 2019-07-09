@@ -20,15 +20,15 @@ with convergence theory presented in the recent papers
 
 ### New Contributions:
 
-* more efficient method for image segmentation eigenvalue problem
+* More efficient method for image segmentation eigenvalue problem
 
    * Requires 50% to 95% fewer flops than the previous `NewtonEigSolver` method of Eriksson, Olsson, Kahl.
 
    * Avoids potentially ill-conditioned generalized eigenvalue problems, instead solving well-conditioned standard eigenvalue problems (see runtime spikes for `NewtonEigSolver` below).
 
-* more efficient method for computing adjacency matrix
+* More efficient method for computing adjacency matrix
 
-   * x
+   * Computes the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  The current method in [`scikit-image`](https://github.com/scikit-image/scikit-image/blob/master/skimage/future/graph/rag.py) requires `O(n^2)`.
 
 
 Demo Tutorial
