@@ -73,3 +73,9 @@ Additional Comments
 
 * The original non-constrained image segmentation method is [Jianbo Shi, Jitendra Malik:
 Normalized Cuts and Image Segmentation. IEEE Trans. Pattern Anal. Mach. Intell. 22(8): 888-905 (2000)](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/papers/sm_pami00.pdf)
+
+* I am also examining another eigenvalue method which should solve the image segmentation problem as one single, evolving eigenvalue problem rather than a sequence of eigenvalue problems.  This new method will likely be much faster than both the methods discussed above.
+
+This method is based on the eigenvalue method [Golub, Ye: An Inverse Free Preconditioned Krylov Subspace Method for Symmetric Generalized Eigenvalue Problems](https://epubs.siam.org/doi/abs/10.1137/S1064827500382579) and is similar to the evolving matrix strategy used in [Saad: Analysis of Subspace Iteration for Eigenvalue Problems with Evolving Matrices](https://www-users.cs.umn.edu/~saad/PDF/ys-2014-1.pdf)
+
+
