@@ -28,7 +28,7 @@ with convergence theory presented in the recent papers
 
 * More efficient method for computing adjacency matrix
 
-   * Computes the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  The current method in [`scikit-image`](https://github.com/scikit-image/scikit-image/blob/master/skimage/future/graph/rag.py) requires `O(n^2)`.
+   * Computes the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  The current method in [`scikit-image`](https://github.com/scikit-image/scikit-image/blob/master/skimage/future/graph/rag.py) requires `O(n^2)` flops.
 
 
 Demo Tutorial
@@ -68,7 +68,7 @@ Contents
 
 Main function:
 
-* `./ImSeg.py`: takes an image and possible link constriants as inputs. Segments the image into disjoint subimages. Returns an array of disjoint subimages.
+* `./ImSeg.py`: takes an image and possible link constraints as inputs. Segments the image into disjoint subimages. Returns an array of disjoint subimages.
 
 Key files and folders:
 
