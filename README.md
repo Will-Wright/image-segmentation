@@ -22,7 +22,13 @@ with convergence theory presented in the recent papers
 
 * more efficient method for image segmentation eigenvalue problem
 
+   * Requires 50% to 95% fewer flops than the previous `NewtonEigSolver` method of Eriksson, Olsson, Kahl.
+
+   * Avoids potentially ill-conditioned generalized eigenvalue problems, instead solving well-conditioned standard eigenvalue problems (see runtime spikes for `NewtonEigSolver` below).
+
 * more efficient method for computing adjacency matrix
+
+   * x
 
 
 Demo Tutorial
@@ -66,7 +72,7 @@ Main function:
 
 Key files and folders:
 
-* `./src/SDPSubspaceSolver/*`: our new method which solves the image segmentation eigenvalue problem as a subspace SDP (semidefinite program).  Requires 50% to 80% fewer flops than the previous method by Eriksson, et al.
+* `./src/SDPSubspaceSolver/*`: our new method which solves the image segmentation eigenvalue problem as a subspace SDP (semidefinite program).  
 
 * `./src/NewtonEigSolver/*`: an implementation of the original Newton method for the image segmentation problem by Eriksson, et al.
 
