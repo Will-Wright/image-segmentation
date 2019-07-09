@@ -18,7 +18,7 @@ with convergence theory presented in the recent papers
 * [Kressner, Lu, Vandereycken: Subspace acceleration for the Crawford number and related eigenvalue optimization problems](http://sma.epfl.ch/~anchpcommon/publications/crawford_preprint.pdf)
 
 
-#### New Contributions:
+### New Contributions:
 
 * more efficient method for image segmentation eigenvalue problem
 
@@ -30,7 +30,7 @@ Demo Tutorial
 
 The following results demonstrate that our method `SDPSubspaceSolver` is more efficient than the previous method `NewtonEigSolver` for image segmentation proposed by Eriksson, Olsson, Kahl.
 
-To recreate this demo, call the function `RunDemo.main()` (dependencies listed below). 
+To run this demo, call the function `RunDemo.main()` (dependencies listed below). 
 
 <p align="center"> 
 <img src="person_walking_small.jpg">
