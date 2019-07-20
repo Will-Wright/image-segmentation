@@ -29,7 +29,7 @@ For a draft of the paper describing the method used in `SDPSubspaceSolver`, plea
 
    * Avoids potentially ill-conditioned generalized eigenvalue problems, instead solving well-conditioned standard eigenvalue problems (see runtime spikes for `NewtonEigSolver` below).
 
-* More efficient method for computing adjacency matrix
+* New sparse method for computing adjacency matrix
 
    * Computes the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  The current method in [`scikit-image`](https://github.com/scikit-image/scikit-image/blob/master/skimage/future/graph/rag.py) requires `O(n^2)` flops.
 
@@ -79,7 +79,7 @@ Key files and folders:
 
 * `./src/NewtonEigSolver/*`: an implementation of the original Newton method for the image segmentation problem by Eriksson, et al.
 
-* `./src/GetAdjMat.py`: computes the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  
+* `./src/GetAdjMat.py`: sparse method to compute the pixel adjacency matrix in `O(n)` flops, where `n` is the number of pixels.  
 
 * `./test/`: contains test images and prototyping files.
 
