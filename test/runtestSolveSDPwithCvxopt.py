@@ -1,10 +1,6 @@
 # This function verifies the function SolveSDPwithCvxopt
 # is correctly transforming SDPs from our form to
 # the cvxopt form.
-#
-# TODO: We can see cvxopt/solvers.sdp correctly solves (A, b, C) form.
-# Now we must code numerical verification and print "Test status: PASS"
-#
 
 import numpy as np
 import sys

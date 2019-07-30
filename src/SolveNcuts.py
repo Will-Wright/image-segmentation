@@ -17,7 +17,7 @@ from scipy.sparse.linalg import eigsh
 def SolveNCuts(aff_arr, eig_tol=1e-4):
 
     invert_D = True
-    
+
     if invert_D:
         # Solves unconstrainted NCuts by inverting D
         n = aff_arr.shape[0]

@@ -77,11 +77,9 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
 #    resize_filter = Image.NEAREST
 #    resize_filter = Image.BILINEAR
 #    resize_filter = Image.BICUBIC
-    
+
     # Opens image
     if not Tk_im_file:
-        # .convert('LA') converts image to grayscale
-#        im_gray = Image.open(im_path).convert('LA') 
         im_RGB = Image.open(im_path)
     else:
         im_RGB = Tk_im_file
@@ -90,24 +88,20 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
     im_height = im_RGB.size[1]
     im_num_pix = im_width*im_height
 
-    
     # Gets linking constraints for image
     (must_link_list1, must_link_list2) \
         = GetConstraints(im_width, im_height, im_RGB, \
                          must_link_list1, must_link_list2, \
                          is_demo_mode)
 
-    
     # Solves im seg subproblem(s) to initialize full problem
     if attempt_resize:
-        
+
         resize_dims_list = list()
         resize_ratio_list = list()
-        
         resize_dims_list.append((im_width, im_height))
         resize_ratio_list.append(1)
         resize_ratio_list.append(resize_ratio)
-        
         im_num_pix_temp = resize_dims_list[-1][0]*resize_dims_list[-1][1]
 
         while (im_num_pix_temp >= resize_min_num_pix):
@@ -115,14 +109,13 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
                               int(round(resize_ratio*resize_dims_list[-1][1])))
             resize_dims_list.append(im_size_resize)
             resize_ratio_list.append(resize_ratio**(len(resize_dims_list)))
-            im_num_pix_temp = im_num_pix * (resize_ratio_list[-1]**2)        
+            im_num_pix_temp = im_num_pix * (resize_ratio_list[-1]**2)
         resize_ratio_list.pop()
-        
+
         while len(resize_ratio_list) > 1:
             im_size_resize = resize_dims_list.pop()
             resize_ratio = resize_ratio_list.pop()
             im_RGB_resize = im_RGB.resize(im_size_resize, resize_filter)
-#        im_gray_resize = im_gray.resize(im_size_resize, resize_filter)
             if verbosity>=1:
                 print("Image resized to", im_size_resize)
 
@@ -135,8 +128,6 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
                 mll_resize1 = []
                 mll_resize2 = []
 
-    #        [im_arr, im_RGB_arr, adj_mat, must_link_list1, must_link_list2, \
-    #         X_sub, V_sub, im, im_RGB, N] \
             [im_RGB_arr, adj_mat, must_link_list1, must_link_list2, \
              X_sub, V_sub, im, im_RGB, N, data] = ImSeg(\
                         im_path = [], Tk_im_file = im_RGB_resize, \
@@ -163,9 +154,6 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
                         is_demo_mode=is_demo_mode, return_data=True, \
                         verbosity=verbosity)[6];
 
-
-    
-    
     if (len(must_link_list1) + len(must_link_list2) >= 1):
         is_lifted = True
         if verbosity>=1:
@@ -178,33 +166,24 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
         GCN_time = float(end) - float(start)
         if verbosity>=1:
             print("GetConstraintNullspace time  : ", "%4.2f" % GCN_time)
-        
+
     else:
         is_lifted = False
         if verbosity>=1:
             print("Image segmentation (NCuts) called with no link constraints")
         N = []
-    
-    
-    start = time.process_time()        
-#    im_gray_arr = np.array(im_gray).astype(np.float32)[0:im_height, 0:im_width, 0]
+
+    start = time.process_time()
     im_RGB_arr = np.array(im_RGB).astype(np.float32)
-    
-#    if use_RGB:
     adj_mat = GetAdjMat(im_RGB_arr, sig_feat, sig_dist, max_dist, is_lifted)
-#    else:
-#        adj_mat = GetAdjMat(im_gray_arr, sig_feat, sig_dist, max_dist, is_lifted)
-    
     end = time.process_time()
     GAM_time = float(end) - float(start)
     if verbosity>=1:
         print("GetAdjMat time               : ", "%4.2f" % GAM_time)
-    
-    
+
     start = time.process_time()
     if is_lifted:
         (A, b, C, V_init) = GetSDPModel(adj_mat, N)
-
         SDPSS_out = SDPSubspaceSolver(A, b, C, V_init=V_init, \
                  pr_tol=pr_tol, du_tol=du_tol, gap_tol=gap_tol, \
                  eig_solver = eig_solver, \
@@ -221,7 +200,7 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
                  pr_dim_update=SDPSS_pr_update, \
                  return_data=return_data, \
                  verbosity=verbosity)
-        
+
         if return_data:
             (X_sub, V_sub, y, SDPSS_data) = SDPSS_out
         else:
@@ -230,7 +209,6 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
         v_SDPSS = N.dot(V_sub.dot(V[:,0]))[0:im_width*im_height]
         v_SDPSS = v_SDPSS/np.linalg.norm(v_SDPSS)
 
-        
         if use_NewtonEigSolver:
             NES_out = NewtonEigSolver(A, b, C, V_init=V_init, \
                  pr_tol=pr_tol, du_tol=du_tol, gap_tol=gap_tol, \
@@ -252,26 +230,21 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
             else:
                 (V1, f) = NES_out
             v_Newton = N.dot(V1[:,0])[0:im_width*im_height]
-            
             v_out = v_Newton
-            
+
         else:
             v_out = v_SDPSS
-            
-   
+
         end = time.process_time()
-        
+
     else:
-        (d, v_NCuts) = SolveNCuts(adj_mat, eigsh_tol_min)  
+        (d, v_NCuts) = SolveNCuts(adj_mat, eigsh_tol_min)
         v_out = v_NCuts
         end = time.process_time()
-        
-        
 
     # Converts NCuts solution to image
     v_out_sign = np.sign(v_out)
     im_seg_Newton_arr = np.reshape(v_out_sign, (im_width, im_height)).T
-
     im_seg_RGB_arr = np.zeros((im_height, im_width, 3), 'uint8')
     for i in range(0,im_height):
         for j in range(0,im_width):
@@ -286,21 +259,15 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
 
     im_seg_RGB = Image.fromarray(im_seg_RGB_arr)
 
-
     if is_demo_mode:
         # Displays segmented image
         time.sleep(3)
         im_seg_RGB.show(title="Newton Image")
 
-        
-    
-    # NEED TO FIX RETURN DATA
-    
-    
     if return_data:
         if is_lifted:
             if use_NewtonEigSolver:
-                data = {'SDPSS_data': SDPSS_data, 
+                data = {'SDPSS_data': SDPSS_data,
                         'NES_data': NES_data}
             else:
                 data = {'SDPSS_data':SDPSS_data}
@@ -314,10 +281,6 @@ def ImSeg(im_path = 'test/amoeba.jpg', Tk_im_file = [], \
                im_RGB, N, data)
     else:
         out = im_seg_RGB_arr
-    
-    
 
-    
     return out
-
 

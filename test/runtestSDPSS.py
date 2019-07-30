@@ -1,13 +1,8 @@
 # This function verifies the function SolveSDPwithCvxopt
 # is correctly transforming SDPs from our form to
 # the cvxopt form.
-#
-# TODO: We can see cvxopt/solvers.sdp correctly solves (A, b, C) form.
-# Now we must code numerical verification and print "Test status: PASS"
-#
 
 import numpy as np
-# from scipy import random, linalg
 from scipy.linalg import orth
 import sys
 import os
@@ -47,7 +42,7 @@ def main(n=300, m=1, cvx_verbose=False, cvx_tol_scale=1, \
     print("Generating random test SDP")
     C = get_rand_spdmat(n, 0, seed_num, is_PSD=True)
     b = np.sqrt(n)*np.random.rand(m,1)
-    
+
     if run_Newton_solver:
         b[0] = 1
         b[1] = 0
@@ -56,14 +51,11 @@ def main(n=300, m=1, cvx_verbose=False, cvx_tol_scale=1, \
     for j in range(0, m):
         A_arr[:,:,j] = get_rand_spdmat(n, j, seed_num+1+j, \
                                        is_PSD=False, \
-                                       run_Newton_solver = run_Newton_solver) 
-
+                                       run_Newton_solver = run_Newton_solver)
     A = (A_arr[:,:,0],)
     for j in range(1, m):
-        A = A + (A_arr[:,:,j],)  
-        
-        
-    
+        A = A + (A_arr[:,:,j],)
+
     if run_cvx_on_full_SDP:
         print('Solving test SDP with cvxopt\n')
         time_start = time.time()
@@ -76,7 +68,7 @@ def main(n=300, m=1, cvx_verbose=False, cvx_tol_scale=1, \
     else:
         X = []
         y = []
-    
+
     print('Solving test SDP with SDPSubspaceSolver\n')
     (X_SDPSS_sub, V_SDPSS_sub, y_SDPSS, SDPSS_data) \
     = SDPSubspaceSolver(A, b, C, eig_solver = eig_solver, \
@@ -86,7 +78,7 @@ def main(n=300, m=1, cvx_verbose=False, cvx_tol_scale=1, \
                         lobpcg_tol_min=1e-14, lobpcg_maxiters = 100000, \
                         pr_dim_update=pr_dim_update, \
                         cvx_verbose=cvx_verbose, return_data=True)
-    
+
     if run_Newton_solver and (m==2):
         (V1, f, NES_data) \
         = NewtonEigSolver(A, b, C, eig_solver = eig_solver_Newton, \
@@ -95,10 +87,9 @@ def main(n=300, m=1, cvx_verbose=False, cvx_tol_scale=1, \
                        lobpcg_tol_init=1e-8, lobpcg_tol_update=1e-2, \
                        lobpcg_tol_min=1e-14, lobpcg_maxiters = 100000, \
                        use_Newton_step=use_Newton_step, return_data=True)
-        
-    
+
     print('Computing residuals for experiments\n')
-    
+
     # Computes residuals for SDPSS
     (A_sub, C_sub) = ProjectModelOntoSubspace(A, C, V_SDPSS_sub)
     pr_res_SDPSS = np.linalg.norm(ComputeAforward(A_sub,X_SDPSS_sub) - b)
@@ -107,7 +98,7 @@ def main(n=300, m=1, cvx_verbose=False, cvx_tol_scale=1, \
     pr_obj = np.tensordot(C_sub,X_SDPSS_sub,2)
     du_obj = np.tensordot(b,y_SDPSS,2)
     gap_res_SDPSS = pr_obj - du_obj # must be >= 0 if pr and du feasible
-    
+
     print('         | primal residual |  dual residual  |  duality gap   | runtime secs')
     print('  SDPSS ', '|    %1.3e   '%pr_res_SDPSS, '|   % 1.3e   '%du_res_SDPSS[0], \
           '|   %1.3e' %gap_res_SDPSS, '   |  %11.2f' %SDPSS_data['time_total'])
@@ -122,21 +113,21 @@ def main(n=300, m=1, cvx_verbose=False, cvx_tol_scale=1, \
         gap_res = pr_obj - du_obj # must be >= 0 if pr and du feasible
         print('full SDP', '|    %1.3e   '%pr_res, '|   % 1.3e   '%min(du_res), \
               '|   %1.3e' %gap_res, '   |  %11.2f' %runtime_cvx)
-    
+
     return X, y, A, b, C, X_SDPSS_sub, V_SDPSS_sub, y_SDPSS
 
 
 def get_rand_spdmat(n, j, seed_num, is_PSD=True, run_Newton_solver = False):
     np.random.seed(seed_num)
-    
+
     U = orth(np.random.rand(n,n))
     if run_Newton_solver and j == 0:
-        D = np.ones((n)) + np.diag(np.random.rand(n))        
+        D = np.ones((n)) + np.diag(np.random.rand(n))
     elif run_Newton_solver and j == 1:
         D = -0.5*np.ones((n)) + np.diag(np.random.rand(n))
     else:
         D = np.ones((n)) + np.diag(np.random.rand(n))
-    
+
     M = np.dot(np.dot(U,D), U.transpose())
     M = M + M.transpose()
     return M
