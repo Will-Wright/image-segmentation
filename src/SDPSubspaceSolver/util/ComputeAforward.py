@@ -5,17 +5,14 @@ def ComputeAforward(A,X):
         m = len(A)
     else:
         m = A.shape[2]
-        
+
     AX = np.zeros((m,1))
-        
+
     for i in range(0,m):
         if isinstance(A,tuple):
             if type(A[i]) is np.ndarray:
-                AX[i,0] = np.tensordot(A[i],X,2)   
-                #print("A[i].dot(X).shape: ", A[i].dot(X).shape)
-                #print("A[i].multiply(X).shape: ", A[i].multiply(X).shape)
-                #AX[i,0] = A[i].dot(X)
-            else:                
+                AX[i,0] = np.tensordot(A[i],X,2)
+            else:
                 AX[i,0] = np.tensordot(A[i],X,2)
         else:
             if m == 1:
